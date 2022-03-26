@@ -2,6 +2,7 @@ package br.furb.main;
 
 import java.io.*;
 import java.util.*;
+import java.util.Scanner;
 
 public class Main {
 
@@ -23,7 +24,12 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        List<Ponto[]> lista = getListaPontos();
+        
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Insira o caminho do arquivo teste!");
+        String path = scan.next();
+        
+        List<Ponto[]> lista = getListaPontos(path);
         lista.forEach(envoltoria -> {
             boolean envoltoriaConvesa = true;
             for (int i = 0; i < envoltoria.length; i++) {
@@ -43,8 +49,6 @@ public class Main {
             }
         });
 
-
-        System.out.println("Hello World!!!");
         System.out.println(lista.get(0));
         System.out.println(lista.get(1));
 
@@ -76,9 +80,9 @@ public class Main {
         return false;
     }
 
-    private static List<Ponto[]> getListaPontos() {
+    private static List<Ponto[]> getListaPontos(String path) {
         List<Ponto[]> lista = new ArrayList<>();
-        File entradaFile = new File("D:\\ArquivoTEste.txt");
+        File entradaFile = new File(path);
         if (entradaFile.canRead()){
             Ponto[] lPontos = null;
             int i = 0;
@@ -96,8 +100,8 @@ public class Main {
                         }
                     } else {
                         String[] numerosLinha = linha.split(" ");
-                        var x = Integer.parseInt(numerosLinha[0]);
-                        var y = Integer.parseInt(numerosLinha[1]);
+                        int x = Integer.parseInt(numerosLinha[0]);
+                        int y = Integer.parseInt(numerosLinha[1]);
                         lPontos[i++] = new Ponto(x, y);
                     }
                 }
